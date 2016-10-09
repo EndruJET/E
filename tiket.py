@@ -1,5 +1,5 @@
-a = int(input())
-k1=a//100000
+a = int(input()) 
+k1=a//100000 #do you realy want to use a[1]... in 2016? LOL
 k2=a//10000
 k3=a//1000
 k4=a//100
