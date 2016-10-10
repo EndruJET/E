@@ -1,0 +1,97 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    Image1: TImage;
+    Button1: TButton;
+    Label1: TLabel;
+    Edit1: TEdit;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  procedure circle(x,y,r:integer);
+  procedure minc(x,y,r:integer);
+  procedure cir(x,y,r:integer);
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var i,a:integer;     x,y,ang,r:real;
+begin
+i:=0;
+With image1 Do
+image1.Canvas.Brush.Color := clBlack;
+image1.Canvas.Brush.Style := bsSolid;
+//image1.FloodFill(x,y,color,fsSurFace);
+image1.Canvas.Rectangle(0,0,ClientWidth,ClientHeight);
+image1.Canvas.Pen.Color := clWhite;
+for i:=1 to 19 do
+  begin
+    a:=i*40;
+    image1.Canvas.MoveTo(a,0);
+    image1.Canvas.LineTo(a,800);
+    image1.Canvas.MoveTo(0,a);
+    image1.Canvas.LineTo(800,a);
+  end;
+//image1.Canvas.Pixels[15,15];
+a:=strtoint(edit1.Text);
+//image1.Canvas.Create.Pen.Width := 2;
+image1.Canvas.MoveTo(400-a,400-3*a);
+image1.Canvas.LineTo(400-a,400+3*a);
+image1.Canvas.MoveTo(400+a,400-3*a);
+image1.Canvas.LineTo(400+a,400+3*a);
+circle(400, 400+3*a, a);         //   400, 400+3*a треугол
+minc(400, 400-3*a, a);
+cir(400-4*a, 400-4*a, a);
+cir(400+4*a, 400+4*a, a);
+cir(400-4*a, 400+4*a, a);
+cir(400+4*a, 400-4*a, a);
+cir(400-4*a, 400, round(a*1.5));
+cir(400+4*a, 400, round(a*1.5));
+image1.Canvas.MoveTo(400,400+4*a);
+image1.Canvas.LineTo(400+4*a,400+8*a);
+image1.Canvas.MoveTo(400,400+4*a);
+image1.Canvas.LineTo(400-4*a,400+8*a);
+end;
+
+procedure circle(x,y,r:integer);
+ var alfa: integer;
+ begin
+  form1.image1.Canvas.moveto(x+r,y);
+  for alfa:=1 to 360 do
+  form1.image1.Canvas.lineto(round(x+r*cos(alfa*pi/360)), round(y+r*sin(alfa*pi/360)))
+ end;
+
+ procedure minc(x,y,r:integer);
+ var alfa: integer;
+ begin
+  form1.image1.Canvas.moveto(x+r,y);
+  for alfa:=1 downto -360 do
+  form1.image1.Canvas.lineto(round(x+r*cos(alfa*pi/360)), round(y+r*sin(alfa*pi/360)))
+ end;
+
+ procedure cir(x,y,r:integer);
+ var alfa: integer;
+ begin
+  form1.image1.Canvas.moveto(x+r,y);
+  for alfa:=1 to 720 do
+  form1.image1.Canvas.lineto(round(x+r*cos(alfa*pi/360)), round(y+r*sin(alfa*pi/360)))
+ end;
+
+
+
+end.
